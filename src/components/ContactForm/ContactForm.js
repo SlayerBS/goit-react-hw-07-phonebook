@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addContact } from "../../redux/contacts/actions";
+import actions from "../../redux/contacts/actions";
 import { v4 as uuidv4 } from "uuid";
 import styles from "./ContactForm.module.css";
 class ContactForm extends Component {
@@ -16,13 +16,9 @@ class ContactForm extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault();
-    if (this.state.name && this.state.number !== "") {
-      const { name, number } = this.state;
-      this.props.onSubmit({ id: uuidv4(), name, number });
-      this.reset();
-      return;
-    }
-    alert("Please, input name and number");
+    const { name, number } = this.state;
+    this.props.onSubmit({ id: uuidv4(), name, number });
+    this.reset();
   };
 
   reset = () => {
@@ -70,6 +66,6 @@ class ContactForm extends Component {
   }
 }
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (data) => dispatch(addContact(data)),
+  onSubmit: (data) => dispatch(actions.addContact(data)),
 });
 export default connect(null, mapDispatchToProps)(ContactForm);
