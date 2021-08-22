@@ -10,6 +10,7 @@ import { fetchContacts } from "./redux/contacts/operations";
 import { changeFilter } from "./redux/contacts/actions";
 import LoaderSpiner from "./components/Loader/Loader";
 import PropTypes from "prop-types";
+import Error from "./components/Error/Error";
 class App extends Component {
   static propTypes = {
     contacts: PropTypes.arrayOf(PropTypes.object),
@@ -20,9 +21,10 @@ class App extends Component {
     this.props.fetchContacts();
   }
   render() {
-    const { isLoading } = this.props;
+    const { error, isLoading } = this.props;
     return (
       <Container>
+        {error && <Error message={error.message} />}
         <Section title="Phonebook">
           <ContactForm />
         </Section>

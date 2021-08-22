@@ -7,6 +7,7 @@ export function fetchContacts() {
 }
 
 export function addContact(contact) {
+  console.log(contact);
   return axios.post("/contacts", contact);
 }
 

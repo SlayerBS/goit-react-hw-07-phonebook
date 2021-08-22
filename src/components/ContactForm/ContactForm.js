@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { addContact } from "../../redux/contacts/operations";
 import contactsSelectors from "../../redux/contacts/selectors";
 
-import { v4 as uuidv4 } from "uuid";
 import styles from "./ContactForm.module.css";
 class ContactForm extends Component {
   state = {
@@ -16,6 +15,7 @@ class ContactForm extends Component {
   handleChange = (evt) => {
     const { name, value } = evt.currentTarget;
     this.setState({ [name]: value });
+    console.log({ [name]: value });
   };
 
   handleSubmit = (evt) => {
@@ -79,6 +79,6 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  onSubmit: (data) => dispatch(addContact(data)),
+  onSubmit: (name, number) => dispatch(addContact(name, number)),
 });
 export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);

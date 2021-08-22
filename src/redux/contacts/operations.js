@@ -27,6 +27,8 @@ export const fetchContacts = () => async (dispatch) => {
 export const addContact = (name, number) => async (dispatch) => {
   const contact = { name, number };
 
+  console.log(contact);
+
   dispatch(addContactRequest());
   try {
     const { data } = await api.addContact(contact);
