@@ -1,12 +1,16 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { addContact } from "../../redux/contacts/actions";
+import { addContact } from "../../redux/contacts/operations";
+import contactsSelectors from "../../redux/contacts/selectors";
+
 import { v4 as uuidv4 } from "uuid";
 import styles from "./ContactForm.module.css";
 class ContactForm extends Component {
   state = {
     name: "",
     number: "",
+    error: false,
+    errorMessage: null,
   };
 
   handleChange = (evt) => {
@@ -18,7 +22,7 @@ class ContactForm extends Component {
     evt.preventDefault();
     if (this.state.name && this.state.number !== "") {
       const { name, number } = this.state;
-      this.props.onSubmit({ id: uuidv4(), name, number });
+      this.props.onSubmit(name, number);
       this.reset();
       return;
     }
@@ -69,7 +73,12 @@ class ContactForm extends Component {
     );
   }
 }
+
+const mapStateToProps = (state) => ({
+  contacts: contactsSelectors.getAllContacts(state),
+});
+
 const mapDispatchToProps = (dispatch) => ({
   onSubmit: (data) => dispatch(addContact(data)),
 });
-export default connect(null, mapDispatchToProps)(ContactForm);
+export default connect(mapStateToProps, mapDispatchToProps)(ContactForm);
