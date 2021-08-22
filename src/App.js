@@ -8,12 +8,19 @@ import Section from "./components/Section";
 import contactsSelectors from "./redux/contacts/selectors";
 import { fetchContacts } from "./redux/contacts/operations";
 import { changeFilter } from "./redux/contacts/actions";
-
+import LoaderSpiner from "./components/Loader/Loader";
+import PropTypes from "prop-types";
 class App extends Component {
+  static propTypes = {
+    contacts: PropTypes.arrayOf(PropTypes.object),
+    fetchContacts: PropTypes.func,
+    isLoading: PropTypes.bool,
+  };
   componentDidMount() {
     this.props.fetchContacts();
   }
   render() {
+    const { isLoading } = this.props;
     return (
       <Container>
         <Section title="Phonebook">
@@ -23,6 +30,7 @@ class App extends Component {
           <Filter />
           <ContactList />
         </Section>
+        {isLoading && <LoaderSpiner />}
       </Container>
     );
   }
