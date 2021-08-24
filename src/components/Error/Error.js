@@ -11,7 +11,7 @@ class Error extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  message: contactsSelectors.getError(state).message,
+  message: contactsSelectors.getError(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({
