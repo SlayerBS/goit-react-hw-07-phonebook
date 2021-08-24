@@ -24,7 +24,7 @@ class App extends Component {
     const { error, isLoading } = this.props;
     return (
       <Container>
-        {error && <Error message={error.message} />}
+        {error && <Error />}
         <Section title="Phonebook">
           <ContactForm />
         </Section>

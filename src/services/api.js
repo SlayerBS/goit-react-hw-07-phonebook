@@ -1,5 +1,8 @@
 import axios from "axios";
+// require("dotenv").load();
+// require("dotenv").config();
 
+// axios.defaults.baseURL = process.env.DB_HOST;
 axios.defaults.baseURL = "http://localhost:3010";
 
 export function fetchContacts() {
