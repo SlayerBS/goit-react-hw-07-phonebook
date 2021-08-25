@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-
+import { Button } from "@material-ui/core";
 import styles from "./ContactList.module.css";
 
 const ContactList = ({ contacts, onDelete }) => (
@@ -9,9 +9,13 @@ const ContactList = ({ contacts, onDelete }) => (
         <span>
           {contact.name}:{contact.number}
         </span>
-        <button onClick={() => onDelete(contact.id)} className={styles.btn}>
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={() => onDelete(contact.id)}
+        >
           Delete
-        </button>
+        </Button>
       </li>
     ))}
   </ul>
